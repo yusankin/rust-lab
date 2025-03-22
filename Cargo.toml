@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "codes/leetcode/*",
+    "codes/atcoder/*",
+    "tools"
+]
