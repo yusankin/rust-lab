@@ -2,5 +2,6 @@
 members = [
     "codes/leetcode/*",
     "codes/atcoder/*",
+    "codes/prototype/*",
     "tools"
 ]
