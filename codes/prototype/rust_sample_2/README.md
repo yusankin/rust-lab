@@ -1,4 +1,4 @@
-# prototype/prototype_sample
+# prototype/rust_sample_2
 
 ## 入出力例
 
