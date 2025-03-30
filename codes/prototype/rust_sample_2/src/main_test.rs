@@ -1,7 +1,7 @@
-// #[cfg(test)]
-// mod tests {
-// #[test]
-// fn sample_test() {
-//     assert_eq!(2 + 2, 4);
-// }
-// }
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn main_test() {
+        println!("test");
+    }
+}

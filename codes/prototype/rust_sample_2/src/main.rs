@@ -189,5 +189,34 @@
 //     println!("{}", res);
 // }
 
-// #[cfg(test)]
-// mod main_test;
+// リスト２−１５　ジェネリック関数の型シグネチャ(コンパイル不可)
+// 型関数Tが、山のカッコのペアと共に導入されている
+// この関数は、同じ型の引数を二つ受け取り、その型の値を一つ返す
+// fn add<T>(i: T, j: T) -> T {
+//     i + j
+// }
+
+// // リスト２−１６　トレイト境界を持つジェネリック関数の型シグネチャ
+// fn add<T: std::ops::Add<Output = T>>(i: T, j: T) -> T {
+//     i + j
+// }
+
+// リスト２−１７　型変数とトレイト境界をもつジェネリック関数
+use std::ops::Add;
+use std::time::Duration;
+
+fn add<T: Add<Output = T>>(i: T, j: T) -> T {
+    i + j
+}
+
+fn main() {
+    let floats = add(1.2, 3.4);
+    let ints = add(10, 20);
+    let durations = add(Duration::new(5, 0), Duration::new(10, 0));
+    println!("{}", floats);
+    println!("{}", ints);
+    println!("{:?}", durations);
+}
+
+#[cfg(test)]
+mod main_test;
