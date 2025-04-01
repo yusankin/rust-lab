@@ -201,21 +201,71 @@
 //     i + j
 // }
 
-// リスト２−１７　型変数とトレイト境界をもつジェネリック関数
-use std::ops::Add;
-use std::time::Duration;
+// // リスト２−１７　型変数とトレイト境界をもつジェネリック関数
+// use std::ops::Add;
+// use std::time::Duration;
 
-fn add<T: Add<Output = T>>(i: T, j: T) -> T {
-    i + j
-}
+// fn add<T: Add<Output = T>>(i: T, j: T) -> T {
+//     i + j
+// }
 
+// fn main() {
+//     let floats = add(1.2, 3.4);
+//     let ints = add(10, 20);
+//     let durations = add(Duration::new(5, 0), Duration::new(10, 0));
+//     println!("{}", floats);
+//     println!("{}", ints);
+//     println!("{:?}", durations);
+// }
+
+// // リスト２−１８　数行の文字列から単純なパターンを検索
+// fn main() {
+//     let search_term = "picture";
+//     let quote = "\
+//     Every face, every shop, bedroom window, public-house, and
+//     dark square is a picture feverishly turned--in search of what?
+//     It is the same with books.
+//     What do we seek through millions of pages?";
+//     // lines()が返す引用文のイテレータで、各テキスト行が反復処理される
+//     // 改行の解釈は実機OSの規約が使われる
+//     for line in quote.lines() {
+//         if line.contains(search_term) {
+//             println!("{}", line);
+//         }
+//     }
+// }
+
+// // リスト２−１９　インデックス変数を手動でインクリメントする
+// fn main() {
+//     let search_term = "picture";
+//     let quote = "\
+//     Every face, every shop, bedroom window, public-house, and
+//     dark square is a picture feverishly turned--in search of what?
+//     It is the same with books.
+//     What do we seek through millions of pages?";
+//     let mut line_num: usize = 1;
+//     for line in quote.lines() {
+//         if line.contains(search_term) {
+//             println!("{}:{}", line_num, line);
+//         }
+//         line_num += 1;
+//     }
+// }
+
+// リスト２−２０　インデックス変数を自動でインクリメントする
 fn main() {
-    let floats = add(1.2, 3.4);
-    let ints = add(10, 20);
-    let durations = add(Duration::new(5, 0), Duration::new(10, 0));
-    println!("{}", floats);
-    println!("{}", ints);
-    println!("{:?}", durations);
+    let search_term = "picture";
+    let quote = "\
+    Every face, every shop, bedroom window, public-house, and
+    dark square is a picture feverishly turned--in search of what?
+    It is the same with books.
+    What do we seek through millions of pages?";
+    for (i, line) in quote.lines().enumerate() {
+        if line.contains(search_term) {
+            let line_num = i + 1; //行番号を求める。ステップごとに計算する必要はない。
+            println!("{}:{}", line_num, line);
+        }
+    }
 }
 
 #[cfg(test)]
