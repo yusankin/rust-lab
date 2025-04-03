@@ -5,7 +5,7 @@ pub fn generate(category: &str, name: &str, is_bin: bool) {
     let src_dir = format!("{}/src", base);
     let md_path = format!("{}/README.md", base);
     let toml_path = format!("{}/Cargo.toml", base);
-    let crate_name = format!("{}", name);
+    let crate_name = name.to_string();
 
     fs::create_dir_all(&src_dir).unwrap();
 
@@ -30,25 +30,32 @@ edition = \"2021\"
     if is_bin {
         // main.rs
         let main_path = format!("{}/main.rs", src_dir);
-        fs::write(&main_path, r#"fn main() {
+        fs::write(
+            &main_path,
+            r#"fn main() {
     println!("Hello, world!");
 }
 
 #[cfg(test)]
 mod main_test;
-"#).unwrap();
+"#,
+        )
+        .unwrap();
 
         // main_test.rs
         let test_path = format!("{}/main_test.rs", src_dir);
-        fs::write(&test_path, r#"#[cfg(test)]
+        fs::write(
+            &test_path,
+            r#"#[cfg(test)]
 mod tests {
     //#[test]
     //fn sample_test() {
     //    assert_eq!(2 + 2, 4);
     //}
 }
-"#).unwrap();
-
+"#,
+        )
+        .unwrap();
     } else {
         // lib.rs
         let lib_path = format!("{}/lib.rs", src_dir);
@@ -56,15 +63,22 @@ mod tests {
 
         // lib_test.rs
         let test_path = format!("{}/lib_test.rs", src_dir);
-        fs::write(&test_path, r#"#[cfg(test)]
+        fs::write(
+            &test_path,
+            r#"#[cfg(test)]
 mod tests {
-    #[test]
-    fn sample_test() {
-        assert_eq!(1 + 1, 2);
-    }
+    //#[test]
+    //fn sample_test() {
+    //    assert_eq!(1 + 1, 2);
+    //}
 }
-"#).unwrap();
+"#,
+        )
+        .unwrap();
     }
 
-    println!("✅ {}/{} を作成しました（--bin: {}）", category, name, is_bin);
+    println!(
+        "✅ {}/{} を作成しました（--bin: {}）",
+        category, name, is_bin
+    );
 }
